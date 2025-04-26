@@ -7,7 +7,7 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-## About this project
+## Custom Documentation written by me
 
 See `course.txt` for how I set it up.
 
@@ -17,6 +17,18 @@ Run below to get the app up and running. Requirement is only to have DDEV.
 
 ```shell
 ddev start
+```
+
+To stop the project:
+
+```shell
+ddev stop
+```
+
+Or, if you've worked with various DDEV projects throughout the day and want to stop all:
+
+```shell
+ddev poweroff
 ```
 
 ## About Laravel
