@@ -2,6 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Car;
+use App\Models\CarFeatures;
+use App\Models\CarImage;
+use App\Models\CarType;
+use App\Models\User;
+
 class HomeController extends Controller
 {
     public function index()
@@ -120,6 +126,73 @@ class HomeController extends Controller
 //        FuelType::create(['name' => 'Electric']);
 //        Car::find(1)->update(['price' => 15_000]);
 //        Car::where('year', '<', 2020)->delete();
+
+//        $car = Car::find(1);
+//        dump($car->features, $car->primaryImage);
+
+//        $car->features->abs = 0;
+//        $car->features->save();
+
+//        $car->features->update(['abs' => 0]);
+//
+//        $car->primaryImage->delete();
+
+//        $car = Car::find(2);
+//        $carFeatures = new CarFeatures([
+//           'abs' => false,
+//            // ...
+//        ]);
+//        $car->features()->save($carFeatures);
+
+        // -------------------------- One-to-Many -----------------------------
+
+//        $car = Car::find(1);
+//
+//        //        $image = new CarImage(['image_path' => 'something', 'position' => 2]);
+////        $car->images()->save($image);
+//
+////        $car->images()->create(['image_path' => 'something 2', 'position' => 3]);
+//
+//        $car->images()->saveMany([
+//            new CarImage(['image_path' => 'something', 'position' => 4]),
+//            new CarImage(['image_path' => 'something', 'position' => 5]),
+//        ]);
+//
+//        $car->images()->createMany([
+//            ['image_path' => 'something', 'position' => 6],
+//            ['image_path' => 'something', 'position' => 7]
+//        ]);
+
+        // -------------------------- Many to one ----------------------------------
+
+//        $car = Car::Find(1);
+//        dd($car->carType);
+
+//        $carType = CarType::where('name', 'Hatchback')->first();
+//        dd($carType->cars);
+//
+//        $cars = Car::whereBelongsTo($carType)->get();
+//        dd($cars);
+
+//        $car = Car::find(1);
+//        $carType = CarType::where('name', 'Sedan')->first();
+//        $car->car_type_id = $carType->id;
+//        $car->save();
+//
+//        $car->carType()->associate($carType);
+//        $car->save();
+
+//        $car = Car::find(1);
+//        dd($car->favouredUsers);
+
+//        $user = User::find(1);
+//        dd($user->favouriteCars);
+//        $user->favouriteCars()->sync([3]);
+//        $user->favouriteCars()->attach([1, 2]);
+//        $user->favouriteCars()->syncWithPivotValues([3], ['']);
+//        $user->favouriteCars()->detach([1, 2]);
+//        $user->favouriteCars()->detach(); // detach everything
+//        dd($user->favouriteCars);
 
         return view('home.index');
     }
