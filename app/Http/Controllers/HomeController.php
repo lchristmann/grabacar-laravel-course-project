@@ -10,6 +10,7 @@ use App\Models\Maker;
 use App\Models\Model;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Sequence;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -243,6 +244,61 @@ class HomeController extends Controller
 ////            ->hasAttached(Car::factory()->count(5), ['col1' => 'value1'], 'favouriteCars')
 //            ->create();
 
-        return view('home.index');
+        // ----------------- querying database even without eloquent orm -----------------
+
+//        $cars = DB::table('cars')->get();
+//        dd($cars);
+
+//        dd(Car::get());
+//        dd(Car::first());
+
+//        $highestPrice = Car::orderBy('price', 'desc')->value('price');
+//        dd($highestPrice);
+
+//        $prices = Car::orderBy('price', 'desc')->pluck('price');
+//        $prices = Car::orderBy('price', 'desc')->pluck('price', 'id');
+//        dd($prices);
+
+//        if (Car::where('user_id', 1)->exists()); // do something
+//        if (Car::where('user_id', 1)->doesntExist()); // do something
+
+//        $cars = Car::select('vin', 'price as car_price')->get();
+//        dd($cars[0]->vin, $cars[0]->car_price);
+
+//        $query = Car::select('vin', 'price as car_price');
+//        $cars = $query->addSelect('mileage')->get();
+//        dd($cars);
+
+//        $distinct = Car::select('maker_id', 'model_id')->distinct()->get();
+//        dd($distinct);
+
+//        $cars = Car::limit(10)->offset(5)->get();
+//        $cars = Car::skip(5)->take(10)->get(); // same as the line above
+
+//        $carCount = Car::where('published_at', '!=', null)->count();
+//        dd($carCount);
+
+//        $minPrice = Car::where('published_at', '!=', null)->min('price'); // can also select max() or avg()
+
+//        $carImageCars = CarImage::selectRaw('car_id, count(*) as image_count')
+//            ->groupBy('car_id')
+//            ->get();
+//        dump($carImageCars[0]);
+
+//        $orderedCars = Car::orderBy('published_at', 'desc')->orderBy('price', 'asc');
+//        Car::latest()->get(); // created_at desc
+//        Car::oldest()->get(); // created_at asc
+//        Car::latest('published_at')->get(); // published_at desc
+//        Car::inRandomOrder()->get();
+//        $notOrderedCars = $orderedCars->reorder()->get(); // can also pass new column to do a different ordering
+//        dd($notOrderedCars);
+
+
+        $cars = Car::where('published_at', '<', now())
+            ->orderBy('published_at', 'desc')
+            ->limit(30)
+            ->get();
+
+        return view('home.index', ['cars' => $cars]);
     }
 }

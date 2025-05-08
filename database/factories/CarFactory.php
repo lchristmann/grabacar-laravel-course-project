@@ -30,7 +30,7 @@ class CarFactory extends Factory
                     ->inRandomOrder()->first()->id;
             },
             'year' => fake()->year(),
-            'price' => fake()->numberBetween(5_000, 100_000),
+            'price' => fake()->numberBetween(5, 100) * 1000,
             'vin' => strtoupper(Str::random(17)),
             'mileage' => fake()->numberBetween(5_000, 100_000),
             'car_type_id' => CarType::inRandomOrder()->first()->id,
