@@ -16,6 +16,30 @@ class HomeController extends Controller
 {
     public function index()
     {
+//        dd(response('Hello World', 404));
+
+//        return response()->json([
+//            1, 2
+//        ]);
+
+//        return response()->view('view', [], 200)
+//            ->withHeaders([
+//                'header-1' => 'value-1',
+//                'header-2' => 'value-2'
+//            ]);
+
+//        return redirect('/car/create');
+
+//        return redirect()->route('car.show', ['car' => 1]);
+
+//        return redirect()->route('car.show', Car::first());
+
+//        return redirect()->away('https://google.com');
+
+//        return response('Hello World', 200)
+//            ->header('header-1', 'value-1')
+//            ->header('header-2', 'value-2');
+
 //        // Select All Cars
 //        $cars = Car::get();
 //
@@ -294,7 +318,8 @@ class HomeController extends Controller
 //        dd($notOrderedCars);
 
 
-        $cars = Car::where('published_at', '<', now())
+        $cars = Car::with(['primaryImage', 'city', 'maker', 'model', 'carType', 'fuelType'])
+            ->where('published_at', '<', now())
             ->orderBy('published_at', 'desc')
             ->limit(30)
             ->get();
